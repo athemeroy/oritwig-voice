@@ -1,0 +1,35 @@
+{
+  "kind": "Silent sequence of actual application screenshots",
+  "not_a_live_recording": true,
+  "not_an_audio_quality_demo": true,
+  "audio_streams": 0,
+  "duration_seconds": 21,
+  "input_files": [
+    {
+      "path": "docs/media/home.png",
+      "sha256": "e54b90088de4a803607a7868b84825c4649111aef0561536df0801b6ea9ecd54"
+    },
+    {
+      "path": "docs/media/processing.png",
+      "sha256": "e5ea92e98aeb1ef842d102a9564904d9dcac0d9599e035182a7e4ff712710384"
+    },
+    {
+      "path": "docs/media/compare.png",
+      "sha256": "f1c9009e4b5064ac30440a94d392eb634791e31a24e4d826507c492e2ae1115e"
+    },
+    {
+      "path": "docs/media/exported.png",
+      "sha256": "a98b3a5f815601126deec1fc80447a669418ce862e060725a589b4848b2d06ab"
+    },
+    {
+      "path": "docs/media/recording.png",
+      "sha256": "4da459622702bd8c78759550915929b18f252f4821b6de9cec9e9522becdc6bf"
+    },
+    {
+      "path": "docs/media/background-save.png",
+      "sha256": "fc32e0caa011f8824feda3bbf9f1c4f9ebb5b698eeb59ad9acaac2289e94320f"
+    }
+  ],
+  "generation": "FFmpeg concat from only these PNG inputs, fps=2, H.264, explicit -an; no audio or video recording was used as an input",
+  "sha256": "60be5c52b7ee2208bd48810922be5c300ea61f5e0cb59f45547dffd232d877ed"
+}

@@ -1,0 +1,12 @@
+<resources>
+<string name="app_name">Oritwig Voice</string>
+<string name="play_audio">▶  Play audio</string>
+<string name="resume">▶  Resume</string>
+<string name="pause">Ⅱ  Pause</string>
+<string name="preparing">Preparing…</string>
+<string name="play_again">▶  Play again</string>
+<string name="one_moment">One moment…</string>
+<string name="cancelling">Cancelling…</string>
+<string name="percent">%1$d%%</string>
+<string name="playback_time">%1$s / %2$s</string>
+</resources>

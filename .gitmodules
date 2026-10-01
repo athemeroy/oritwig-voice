@@ -1,0 +1,3 @@
+[submodule "engine/rnnoise"]
+	path = engine/rnnoise
+	url = https://github.com/athemeroy/oritwig-rnnoise.git

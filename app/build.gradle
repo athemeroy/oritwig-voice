@@ -1,0 +1,27 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'dev.oritwig.voice'
+    compileSdk 35
+    buildToolsVersion '35.0.0'
+    defaultConfig {
+        applicationId 'dev.oritwig.voice'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0-prototype'
+        testInstrumentationRunner 'dev.oritwig.voice.VoiceInstrumentation'
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    testOptions { unitTests.returnDefaultValues = true }
+    lint { abortOnError true; checkReleaseBuilds true }
+}
+dependencies {
+    implementation files('libs/oritwig-rnnoise-proof-0.1.0.aar')
+    testImplementation 'junit:junit:4.13.2'
+}
+// Verify original source and either the reviewed AAR or a successful local rebuild receipt.
+tasks.register('verifyPinnedEngine', Exec) {
+    workingDir rootProject.projectDir
+    commandLine 'python3', 'tools/engine-build.py', 'verify'
+}
+tasks.named('preBuild').configure { dependsOn tasks.named('verifyPinnedEngine') }
