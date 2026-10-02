@@ -1,6 +1,6 @@
 # Oritwig Voice
 
-A local Android speech-cleanup app built around the **unchanged RNNoise engine and model used by Telegram**. No account or server needed.
+A local Android reference app for a speech-cleanup workflow, built around the **unchanged RNNoise engine and model used by Telegram**. No account or server needed.
 
 - Record speech or import a supported WAV
 - Keep and name the original; reduce background noise on-device
@@ -21,7 +21,11 @@ A local Android speech-cleanup app built around the **unchanged RNNoise engine a
 
 RNNoise is **Xiph/Mozilla and contributor work**, a third-party dependency vendored by Telegram. We use the [exact Telegram snapshot at f2908b](https://github.com/DrKLO/Telegram/tree/f2908b14133bbffbf7ab04f641ecb5bfaf533242/TMessagesProj/jni/voip/rnnoise), with all 21 files, DSP and default model unchanged.
 
-[Upstream already provides a library and documents a raw-PCM example CLI](https://github.com/DrKLO/Telegram/blob/f2908b14133bbffbf7ab04f641ecb5bfaf533242/TMessagesProj/jni/voip/rnnoise/README). This app adds the complete Android workflow around it: opt-in capture, WAV import, named local originals, progress/cancellation, A/B listening and file-picker export. Our code is shell and lifecycle/JNI/WAV framing adapters; no new denoiser, resampler or codec algorithm.
+[RNNoise upstream already provides a reusable C library and a raw-PCM example CLI](https://github.com/xiph/rnnoise#readme). The narrower reusable contribution here is the [Android RNNoise binding](https://github.com/athemeroy/oritwig-rnnoise/tree/1d48b939677621baf0c197dcf95ac0c10de088f6): four-ABI packaging (arm64-v8a, armeabi-v7a, x86 and x86_64), Java/JNI access, native-state lifecycle/reset and PCM16 conversion around the pinned engine. All denoising remains upstream RNNoise; no new denoiser, resampler or codec algorithm is added.
+
+This app demonstrates that binding through opt-in capture, WAV import, named local originals, progress/cancellation, A/B listening and file-picker export. `WavIO` and `SpeechProcessor` are app utilities for WAV validation, file streaming and tested padding/flush/trim policy. They are separate from the engine and do not add audio-processing algorithms.
+
+For a different integration scope, [rnnoise-kmp](https://github.com/Enaium/rnnoise-kmp#readme) documents Kotlin Multiplatform bindings, Android JNI packaging for the same four ABIs and an Android loopback example. Its platform claims come from its own documentation; we have not established its production maturity or run a comparative evaluation. Choose the binding and upstream snapshot that fit your project rather than assuming Oritwig is the only Android option.
 
 Compared with Telegram, this is an independent file tool with no chats, calls, account system, Telegram UI or network stack. It reuses the RNNoise dependency, not Telegram’s application or capture pipeline. [Source identity and exact change boundary](docs/TECHNICAL.md).
 
@@ -32,7 +36,7 @@ Compared with Telegram, this is an independent file tool with no chats, calls, a
 - No internet permission, analytics or ads. Microphone access follows an in-app opt-in; leaving the app stops and saves capture
 - Originals stay in app-private storage; backup/device transfer are disabled. Export a copy before uninstalling. A chosen export provider may upload using its own settings
 
-Debug/release builds, lint, 9 JVM tests and 44 on-device checks pass. Real system-picker import/export, permission denial/grant and background capture save were verified. Physical microphone quality, real-speech listening and broader device testing remain open. [Full verification and limits](docs/VALIDATION.md).
+Debug/release builds, lint, 9 JVM tests and 44 on-device checks pass. Real system-picker import/export, permission denial/grant and background capture save were verified. Real-speech cleanup quality, physical-microphone behavior and physical-device performance remain unproven; broader device testing is still open. These checks establish wrapper/workflow behavior, not an audio-quality or performance advantage over other RNNoise integrations. [Full verification and limits](docs/VALIDATION.md).
 
 ## Build and license
 
